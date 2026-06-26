@@ -17,13 +17,5 @@ def login():
     return False                                    # y tambien retornara false
 
 
-"""pruebita"""
-#   prueba1=login() # admin%1234 usuario y contraseña cargados en el txt
-#   if prueba1:
-#       print("deberia mostrarte true")
-#       print("\n",prueba1)
-#   else:
-#       print("deberia mostrarte false")
-#       print("\n",prueba1)
 
 
