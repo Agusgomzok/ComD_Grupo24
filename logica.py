@@ -1,8 +1,8 @@
-from validaciones import Validacion
+from validaciones import validar_deposito, validar_extraccion
 
 def realizar_extraccion(saldo_actual, monto):
     if validar_extraccion(monto, saldo_actual):
-        saldo_nuevo: saldo_actual - monto
+        saldo_nuevo = saldo_actual - monto
         print("Operacion Aprobada")
         return saldo_nuevo
     return saldo_actual
@@ -14,7 +14,6 @@ def realizar_deposito(saldo_actual, monto):
 
 def realizar_transferencias(saldo_actual, monto_a_transferir):
     if validar_extraccion(monto_a_transferir, saldo_actual):
+        print("transferencia realizada")
         return saldo_actual - monto_a_transferir
     return saldo_actual
-
-def realizar_
