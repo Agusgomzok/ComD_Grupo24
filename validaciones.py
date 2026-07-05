@@ -1,25 +1,40 @@
-def validar_usuario(Nombre,Contraseña):
+def validar_usuario(Nombre, Contraseña):
     try:
-        with open("Usuarios.txt","r") as archivo:   #abro el archivo el with se asegura que se cierre cuando termine el bloque
+        with open("usuarios.txt", "r") as archivo:
             for linea in archivo:
-                nombre_archivo, clave_archivo = linea.strip().split("%") #strip borra los saltos de linea y split devuelve una lista con las 2 palabras
+                nombre_archivo, clave_archivo, saldo_archivo = linea.strip().split("%")
             
-                if (Nombre == nombre_archivo) and (Contraseña == clave_archivo) :
-                    return True                                                     #El return corta la ejecucion, es como un break pero devuelve un valor
+                if (Nombre == nombre_archivo) and (Contraseña == clave_archivo):
+                    return float(saldo_archivo) # Si es válido, devolvemos el saldo numérico
+                    
+            return -1.0 # Si termina el para y no encontró coincidencias, devuelve -1.0
+    except FileNotFoundError:
+        print("Error: No se encontró el archivo usuarios.txt en la carpeta")
+        return -1.0
+
+def existe_usuario(Nombre):
+    try:
+        with open("usuarios.txt", "r") as archivo:
+            for linea in archivo:
+                nombre_archivo, clave_archivo, saldo_archivo = linea.strip().split("%")
+                
+                if Nombre == nombre_archivo:
+                    return True
             return False
     except FileNotFoundError:
-        print ("Error: No se econtro el archivo usario.xtx en la carpeta")
-    
+        return False
+
 def validar_extraccion(monto, saldo_actual):
     if monto <= 0:
         print("Error: el monto a extraer debe ser mayor a cero")
-    if monto > saldo_actual:
-        print("Saldo insuficiente")
         return False
-    return False
+    if monto > saldo_actual:
+        print("Error: Saldo insuficiente")
+        return False
+    return True 
 
 def validar_deposito(monto):
     if monto <= 0:
-        print("error: el monto debe ser mayot a cero")
+        print("Error: el monto debe ser mayor a cero")
         return False
-    return False
+    return True
